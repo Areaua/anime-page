@@ -1,25 +1,114 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import ToggleSwitch from './components/ToggleSwitch';
+import ReadButton from './components/ReadButton';
+import ComicReadingPage from './components/ComicReadingPage';
 
-function App() {
+const App = () => {
+  const [showComicPage, setShowComicPage] = useState(false);
+  const [pornFilter, setPornFilter] = useState(false);
+  const [selectedGenre, setSelectedGenre] = useState('all');
+
+  const handleToggleChange = (checked) => {
+    setPornFilter(checked);
+  };
+
+  const handleReadClick = () => {
+    setShowComicPage(true);
+  };
+
+  const handleGenreClick = (genre) => {
+    setSelectedGenre(genre);
+  };
+
+  const animes = [
+    { name: 'Anime Thriller 1', genre: 'Thriller' },
+    { name: 'Anime Thriller 2', genre: 'Thriller' },
+    { name: 'Anime Drama 1', genre: 'Drama' },
+    { name: 'Anime Drama 2', genre: 'Drama' },
+    { name: 'Anime Supernatural 1', genre: 'Supernatural' },
+    { name: 'Anime Supernatural 2', genre: 'Supernatural' },
+  ];
+
+  const filteredAnimes = selectedGenre === 'all' ? animes : animes.filter(anime => anime.genre === selectedGenre);
+
+  if (showComicPage) {
+    return <ComicReadingPage />;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="bg-gray-100 min-h-screen">
+      <div className="bg-black text-white p-2 flex justify-between items-center">
+        <div className="flex items-center">
+          <span className="text-orange-500 text-lg">🔥</span>
+          <span className="ml-2">Need hotter content?</span>
+        </div>
+        <div className="flex items-center">
+          <ToggleSwitch onChange={handleToggleChange} checked={pornFilter} />
+        </div>
+      </div>
+      <div className="relative">
+        <img
+          alt="Anime background"
+          className="w-full h-64 object-cover"
+          src="https://storage.googleapis.com/a1aa/image/XzBJtjW6lypKPF4VLR6QDMAyilFn9ulNcm8EXLiZtxyaey3JA.jpg"
+        />
+        <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-black bg-opacity-50">
+          <h1 className="text-white text-3xl font-bold">Cinderella Chef</h1>
+          <ReadButton onClick={handleReadClick} />
+        </div>
+      </div>
+      <div className="flex justify-center space-x-4 mt-4">
+        <button className="bg-gray-400 text-white px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('all')}>
+          All
+        </button>
+        <button className="bg-yellow-400 text-white px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('Thriller')}>
+          <i className="fas fa-skull mr-2"></i>
+          Thriller
+        </button>
+        <button className="bg-orange-400 text-white px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('Drama')}>
+          <i className="fas fa-heart mr-2"></i>
+          Drama
+        </button>
+        <button className="bg-yellow-200 text-orange-500 px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('Supernatural')}>
+          <i className="fas fa-magic mr-2"></i>
+          Supernatural
+        </button>
+      </div>
+      <div className="grid grid-cols-2 gap-4 p-4">
+        {filteredAnimes.map((anime, i) => (
+          <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden">
+            <img
+              alt="Anime character"
+              className="w-full h-48 object-cover"
+              src="https://storage.googleapis.com/a1aa/image/gfrrf5fQYMLJqoSeasJzmjhjyAy3F53XbAmcJV7F07BpmXedC.jpg"
+            />
+            <div className="p-4">
+              <h2 className="text-lg font-bold">{anime.name}</h2>
+              <p className="text-gray-500">{anime.genre}</p>
+              <div className="flex items-center mt-2">
+                <i className="fas fa-star text-yellow-400"></i>
+                <span className="ml-2 text-gray-700">4.6/5</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="bg-white fixed bottom-0 w-full flex justify-around items-center py-2 border-t border-gray-200">
+        <div className="flex flex-col items-center text-orange-500">
+          <i className="fas fa-home text-2xl"></i>
+          <span className="text-xs">Home</span>
+        </div>
+        <div className="flex flex-col items-center text-gray-400">
+          <i className="fas fa-heart text-2xl"></i>
+          <span className="text-xs">Favourites</span>
+        </div>
+        <div className="flex flex-col items-center text-gray-400">
+          <i className="fas fa-user text-2xl"></i>
+          <span className="text-xs">Profile</span>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
