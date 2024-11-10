@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ToggleSwitch from './components/ToggleSwitch';
-import ReadButton from './components/ReadButton';
+import MangaSlideshow from './components/MangaSlideshow';
 import ComicReadingPage from './components/ComicReadingPage';
 
 const App = () => {
@@ -12,12 +12,16 @@ const App = () => {
     setPornFilter(checked);
   };
 
+  const handleGenreClick = (genre) => {
+    setSelectedGenre(genre);
+  };
+
   const handleReadClick = () => {
     setShowComicPage(true);
   };
 
-  const handleGenreClick = (genre) => {
-    setSelectedGenre(genre);
+  const handleBackClick = () => {
+    setShowComicPage(false);
   };
 
   const animes = [
@@ -29,14 +33,42 @@ const App = () => {
     { name: 'Anime Supernatural 2', genre: 'Supernatural' },
   ];
 
+  const adultAnimes = [
+    { name: 'Anime Thriller 18+', genre: 'Thriller' },
+    { name: 'Anime Drama 18+', genre: 'Drama' },
+    { name: 'Anime Supernatural 18+', genre: 'Supernatural' },
+  ];
+
+  const mangas = [
+    {
+      title: "Cinderella Chef",
+      image: "https://storage.googleapis.com/a1aa/image/aBzENfwKiJzoRKKEAQkYIdYlnVDuoReOHeTosFLUxdbEXQfOB.jpg"
+    },
+    {
+      title: "Another Manga",
+      image: "https://storage.googleapis.com/a1aa/image/UdGsLfffIlcz0pfHAkLoBI5wXDPVzyzSdEOSNvA67M7NugedC.jpg"
+    },
+    {
+      title: "Yet Another Manga",
+      image: "https://storage.googleapis.com/a1aa/image/3.jpg"
+    },
+    {
+      title: "Fourth Manga",
+      image: "https://storage.googleapis.com/a1aa/image/XzBJtjW6lypKPF4VLR6QDMAyilFn9ulNcm8EXLiZtxyaey3JA.jpg"
+    }
+  ];
+
   const filteredAnimes = selectedGenre === 'all' ? animes : animes.filter(anime => anime.genre === selectedGenre);
+  const filteredAdultAnimes = selectedGenre === 'all' ? adultAnimes : adultAnimes.filter(anime => anime.genre === selectedGenre);
+
+  const allAnimes = pornFilter ? [...filteredAnimes, ...filteredAdultAnimes] : filteredAnimes;
 
   if (showComicPage) {
-    return <ComicReadingPage />;
+    return <ComicReadingPage onBackClick={handleBackClick} />;
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-100 min-h-screen overflow-y-auto">
       <div className="bg-black text-white p-2 flex justify-between items-center">
         <div className="flex items-center">
           <span className="text-orange-500 text-lg">🔥</span>
@@ -46,17 +78,7 @@ const App = () => {
           <ToggleSwitch onChange={handleToggleChange} checked={pornFilter} />
         </div>
       </div>
-      <div className="relative">
-        <img
-          alt="Anime background"
-          className="w-full h-64 object-cover"
-          src="https://storage.googleapis.com/a1aa/image/XzBJtjW6lypKPF4VLR6QDMAyilFn9ulNcm8EXLiZtxyaey3JA.jpg"
-        />
-        <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-black bg-opacity-50">
-          <h1 className="text-white text-3xl font-bold">Cinderella Chef</h1>
-          <ReadButton onClick={handleReadClick} />
-        </div>
-      </div>
+      <MangaSlideshow mangas={mangas} onReadClick={handleReadClick} />
       <div className="flex justify-center space-x-4 mt-4">
         <button className="bg-gray-400 text-white px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('all')}>
           All
@@ -75,7 +97,7 @@ const App = () => {
         </button>
       </div>
       <div className="grid grid-cols-2 gap-4 p-4">
-        {filteredAnimes.map((anime, i) => (
+        {allAnimes.map((anime, i) => (
           <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden">
             <img
               alt="Anime character"
@@ -85,6 +107,9 @@ const App = () => {
             <div className="p-4">
               <h2 className="text-lg font-bold">{anime.name}</h2>
               <p className="text-gray-500">{anime.genre}</p>
+              {anime.name.includes('18+') && (
+                <span className="text-red-500 text-xs">18+</span>
+              )}
               <div className="flex items-center mt-2">
                 <i className="fas fa-star text-yellow-400"></i>
                 <span className="ml-2 text-gray-700">4.6/5</span>
@@ -93,7 +118,7 @@ const App = () => {
           </div>
         ))}
       </div>
-      <div className="bg-white fixed bottom-0 w-full flex justify-around items-center py-2 border-t border-gray-200">
+      <div className="footer bg-white fixed bottom-0 w-full flex justify-around items-center py-2 border-t border-gray-200">
         <div className="flex flex-col items-center text-orange-500">
           <i className="fas fa-home text-2xl"></i>
           <span className="text-xs">Home</span>
