@@ -1,3 +1,4 @@
+// src/components/MangaSlideshow.js
 import React, { useState, useEffect } from 'react';
 
 const MangaSlideshow = ({ mangas, onReadClick }) => {
@@ -22,7 +23,7 @@ const MangaSlideshow = ({ mangas, onReadClick }) => {
       <img
         src={manga.image}
         alt={manga.title}
-        className="w-full h-64 object-cover rounded-lg shadow-animation"
+        className="w-full h-64 object-cover rounded-lg"
       />
       <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-black bg-opacity-50">
         <h1 className="text-white text-3xl font-bold">{manga.title}</h1>
