@@ -1,15 +1,24 @@
-// src/App.js
 import React, { useState } from 'react';
 import ToggleSwitch from './components/ToggleSwitch';
 import MangaSlideshow from './components/MangaSlideshow';
 import ComicReadingPage from './components/ComicReadingPage'; // Добавлен импорт
 import AnimeCard from './components/AnimeCard';
 
+const genreEmojis = {
+  'Thriller': '💀',
+  'Drama': '💔',
+  'Supernatural': '🔮',
+  'Romance': '❤️',
+  'Adventure': '🗺️',
+  'Business': '💼',
+};
+
 const App = () => {
   const [showComicPage, setShowComicPage] = useState(false);
   const [pornFilter, setPornFilter] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState('all');
   const [selectedAnime, setSelectedAnime] = useState(null);
+  const [savedAnimes, setSavedAnimes] = useState([]);
 
   const handleToggleChange = (checked) => {
     setPornFilter(checked);
@@ -29,6 +38,14 @@ const App = () => {
 
   const handleAnimeClick = (anime) => {
     setSelectedAnime(anime);
+  };
+
+  const handleSaveClick = (anime) => {
+    if (savedAnimes.includes(anime)) {
+      setSavedAnimes(savedAnimes.filter(savedAnime => savedAnime !== anime));
+    } else {
+      setSavedAnimes([...savedAnimes, anime]);
+    }
   };
 
   const animes = [
@@ -88,14 +105,20 @@ const App = () => {
       <div className="bg-gray-100 min-h-screen">
         <div className="bg-white shadow-md">
           <div className="flex justify-between items-center p-4">
-            <button className="text-blue-500" onClick={() => setSelectedAnime(null)}>Back</button>
-            <h1 className="text-lg font-bold">ANIME HUB</h1>
+            <button className="text-blue-500 flex items-center" onClick={() => setSelectedAnime(null)}>
+              <span>🔙</span> Back
+            </button>
           </div>
         </div>
         <div className="p-4">
           <img src={selectedAnime.image} alt={selectedAnime.name} className="w-full h-64 object-cover rounded-lg" />
           <div className="flex items-center mt-4">
-            <span className="bg-yellow-500 text-white px-4 py-1 rounded-full">{selectedAnime.genre}</span>
+            <span className="bg-yellow-500 text-white px-4 py-1 rounded-full">
+              {genreEmojis[selectedAnime.genre]} {selectedAnime.genre}
+            </span>
+            <button className="ml-2 text-blue-500" onClick={() => handleSaveClick(selectedAnime)}>
+              {savedAnimes.includes(selectedAnime) ? 'Unsave' : 'Save'}
+            </button>
           </div>
           <h2 className="text-2xl font-bold mt-4">{selectedAnime.name}</h2>
           <div className="flex items-center mt-2">
@@ -130,11 +153,6 @@ const App = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      <div className="bg-white shadow-md">
-        <div className="flex justify-center items-center p-4">
-          <h1 className="text-lg font-bold">ANIME HUB</h1>
-        </div>
-      </div>
       <div className="bg-black text-white p-2 flex items-center justify-between">
         <span className="flex items-center">
           <i className="fas fa-fire text-red-500 mr-2"></i>
@@ -148,33 +166,33 @@ const App = () => {
           All
         </button>
         <button className="bg-yellow-400 text-white px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('Thriller')}>
-          <i className="fas fa-skull mr-2"></i>
+          <span>💀</span>
           Thriller
         </button>
         <button className="bg-orange-400 text-white px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('Drama')}>
-          <i className="fas fa-heart mr-2"></i>
+          <span>💔</span>
           Drama
         </button>
         <button className="bg-yellow-200 text-orange-500 px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('Supernatural')}>
-          <i className="fas fa-magic mr-2"></i>
+          <span>🔮</span>
           Supernatural
         </button>
         <button className="bg-pink-400 text-white px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('Romance')}>
-          <i className="fas fa-heart mr-2"></i>
+          <span>❤️</span>
           Romance
         </button>
         <button className="bg-green-400 text-white px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('Adventure')}>
-          <i className="fas fa-map mr-2"></i>
+          <span>🗺️</span>
           Adventure
         </button>
         <button className="bg-blue-400 text-white px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('Business')}>
-          <i className="fas fa-briefcase mr-2"></i>
+          <span>💼</span>
           Business
         </button>
       </div>
       <div className="grid grid-cols-2 gap-4 p-4">
         {allAnimes.map((anime, index) => (
-          <AnimeCard key={index} anime={anime} onClick={() => handleAnimeClick(anime)} />
+          <AnimeCard key={index} anime={anime} onClick={() => handleAnimeClick(anime)} genreEmojis={genreEmojis} savedAnimes={savedAnimes} onSaveClick={handleSaveClick} />
         ))}
       </div>
       <div className="bg-white fixed bottom-0 w-full flex justify-around items-center py-2 border-t border-gray-200">
