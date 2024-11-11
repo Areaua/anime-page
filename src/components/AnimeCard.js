@@ -10,7 +10,10 @@ const AnimeCard = ({ anime, onClick, genreEmojis, savedAnimes, onSaveClick }) =>
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer" onClick={onClick}>
+    <div 
+      className="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer card-animation" 
+      onClick={onClick}
+    >
       <img src={anime.image} alt={anime.name} className="w-full h-40 object-cover" />
       <div className="p-2">
         <h3 className="text-sm font-bold">{anime.name}</h3>

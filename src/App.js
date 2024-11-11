@@ -112,11 +112,14 @@ const App = () => {
         </div>
         <div className="p-4">
           <img src={selectedAnime.image} alt={selectedAnime.name} className="w-full h-64 object-cover rounded-lg" />
-          <div className="flex items-center mt-4">
+          <div className="flex items-center justify-between mt-4">
             <span className="bg-yellow-500 text-white px-4 py-1 rounded-full">
               {genreEmojis[selectedAnime.genre]} {selectedAnime.genre}
             </span>
-            <button className="ml-2 text-blue-500" onClick={() => handleSaveClick(selectedAnime)}>
+            <button 
+              className="text-blue-500 save-button-animation" 
+              onClick={() => handleSaveClick(selectedAnime)}
+            >
               {savedAnimes.includes(selectedAnime) ? 'Unsave' : 'Save'}
             </button>
           </div>
@@ -162,30 +165,51 @@ const App = () => {
       </div>
       <MangaSlideshow mangas={mangas} onReadClick={handleReadClick} />
       <div className="flex justify-center space-x-2 mt-4">
-        <button className="bg-gray-400 text-white px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('all')}>
+        <button 
+          className="bg-gray-400 text-white px-4 py-2 rounded-full flex items-center genre-filter-animation" 
+          onClick={() => handleGenreClick('all')}
+        >
           All
         </button>
-        <button className="bg-yellow-400 text-white px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('Thriller')}>
+        <button 
+          className="bg-yellow-400 text-white px-4 py-2 rounded-full flex items-center genre-filter-animation genre-thriller" 
+          onClick={() => handleGenreClick('Thriller')}
+        >
           <span>💀</span>
           Thriller
         </button>
-        <button className="bg-orange-400 text-white px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('Drama')}>
+        <button 
+          className="bg-orange-400 text-white px-4 py-2 rounded-full flex items-center genre-filter-animation genre-drama" 
+          onClick={() => handleGenreClick('Drama')}
+        >
           <span>💔</span>
           Drama
         </button>
-        <button className="bg-yellow-200 text-orange-500 px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('Supernatural')}>
+        <button 
+          className="bg-yellow-200 text-orange-500 px-4 py-2 rounded-full flex items-center genre-filter-animation genre-supernatural" 
+          onClick={() => handleGenreClick('Supernatural')}
+        >
           <span>🔮</span>
           Supernatural
         </button>
-        <button className="bg-pink-400 text-white px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('Romance')}>
+        <button 
+          className="bg-pink-400 text-white px-4 py-2 rounded-full flex items-center genre-filter-animation genre-romance" 
+          onClick={() => handleGenreClick('Romance')}
+        >
           <span>❤️</span>
           Romance
         </button>
-        <button className="bg-green-400 text-white px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('Adventure')}>
+        <button 
+          className="bg-green-400 text-white px-4 py-2 rounded-full flex items-center genre-filter-animation genre-adventure" 
+          onClick={() => handleGenreClick('Adventure')}
+        >
           <span>🗺️</span>
           Adventure
         </button>
-        <button className="bg-blue-400 text-white px-4 py-2 rounded-full flex items-center" onClick={() => handleGenreClick('Business')}>
+        <button 
+          className="bg-blue-400 text-white px-4 py-2 rounded-full flex items-center genre-filter-animation genre-business" 
+          onClick={() => handleGenreClick('Business')}
+        >
           <span>💼</span>
           Business
         </button>

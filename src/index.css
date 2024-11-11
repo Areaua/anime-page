@@ -10,7 +10,67 @@
   .shadow-animation:hover {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   }
+
+  .button-animation {
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  .button-animation:hover {
+    background-color: #ffcc00;
+    transform: scale(1.05);
+  }
+
+  .card-animation {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+  .card-animation:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .genre-filter-animation {
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  .genre-filter-animation:hover {
+    transform: scale(1.05);
+  }
+
+  .genre-thriller:hover {
+    background-color: #ff4d4d; /* Яркий красный для триллера */
+  }
+
+  .genre-drama:hover {
+    background-color: #ff8080; /* Яркий оранжевый для драмы */
+  }
+
+  .genre-supernatural:hover {
+    background-color: #ffcc99; /* Яркий желтый для сверхъестественного */
+  }
+
+  .genre-romance:hover {
+    background-color: #ff99cc; /* Яркий розовый для романтики */
+  }
+
+  .genre-adventure:hover {
+    background-color: #99ff99; /* Яркий зеленый для приключений */
+  }
+
+  .genre-business:hover {
+    background-color: #99ccff; /* Яркий синий для бизнеса */
+  }
+
+  .save-button-animation {
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  .save-button-animation:hover {
+    background-color: #ffcc00;
+    transform: scale(1.05);
+  }
 }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -79,6 +139,7 @@ code {
 .toggle-switch-label.active {
   left: 30px;
 }
+
 /* Общие стили для точек навигации */
 .dot {
   height: 10px;
@@ -92,13 +153,16 @@ code {
 .dot.active {
   background-color: #ffcc00;
 }
+
 body {
   overflow-y: auto;
 }
+
 .footer {
   width: 100%;
   margin: 0 auto;
 }
+
 .shadow-animation {
   transition: box-shadow 0.3s ease-in-out;
 }
@@ -106,6 +170,7 @@ body {
 .shadow-animation:hover {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
+
 /* Общие стили для баннеров */
 .banner {
   display: block;
