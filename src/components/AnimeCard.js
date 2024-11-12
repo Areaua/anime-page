@@ -1,14 +1,7 @@
-import React, { useState } from 'react';
+// components/AnimeCard.js
+import React from 'react';
 
-const AnimeCard = ({ anime, onClick, genreEmojis, savedAnimes, onSaveClick }) => {
-  const [isSaved, setIsSaved] = useState(savedAnimes.includes(anime));
-
-  const handleSaveClick = (e) => {
-    e.stopPropagation();
-    onSaveClick(anime);
-    setIsSaved(!isSaved);
-  };
-
+const AnimeCard = ({ anime, onClick, genreEmojis }) => {
   return (
     <div 
       className="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer card-animation" 
@@ -21,10 +14,6 @@ const AnimeCard = ({ anime, onClick, genreEmojis, savedAnimes, onSaveClick }) =>
           <p className="text-xs text-gray-500">
             {genreEmojis[anime.genre]} {anime.genre}
           </p>
-          <div
-            className={`w-8 h-10 clip-path-polygon transition-bg cursor-pointer ${isSaved ? 'bg-black' : 'bg-light-gray'}`}
-            onClick={handleSaveClick}
-          ></div>
         </div>
         {anime.name.includes('18+') && (
           <span className="text-red-500 text-xs">18+</span>

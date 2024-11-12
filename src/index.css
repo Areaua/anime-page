@@ -35,6 +35,7 @@
 
   .genre-filter-animation:hover {
     transform: scale(1.05);
+    filter: brightness(1.1); /* Добавляем эффект выгорания */
   }
 
   .genre-thriller:hover {
@@ -68,6 +69,15 @@
   .save-button-animation:hover {
     background-color: #ffcc00;
     transform: scale(1.05);
+  }
+
+  .footer-button-animation {
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+
+  .footer-button-animation:hover {
+    transform: scale(1.1);
+    color: #ffcc00;
   }
 }
 

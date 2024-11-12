@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
-import ToggleSwitch from './components/ToggleSwitch';
+import React, { useState, useEffect } from 'react';
 import MangaSlideshow from './components/MangaSlideshow';
-import ComicReadingPage from './components/ComicReadingPage'; // Добавлен импорт
-import AnimeCard from './components/AnimeCard';
+import ComicReadingPage from './components/ComicReadingPage';
+import FavouritesPage from './components/FavouritesPage';
+import GenreSelector from './components/GenreSelector';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import AnimeList from './components/AnimeList';
+import AnimeDetails from './components/AnimeDetails';
 
 const genreEmojis = {
   'Thriller': '💀',
@@ -15,10 +19,15 @@ const genreEmojis = {
 
 const App = () => {
   const [showComicPage, setShowComicPage] = useState(false);
-  const [pornFilter, setPornFilter] = useState(false);
+  const [pornFilter, setPornFilter] = useState(localStorage.getItem('pornFilter') === 'true');
   const [selectedGenre, setSelectedGenre] = useState('all');
   const [selectedAnime, setSelectedAnime] = useState(null);
   const [savedAnimes, setSavedAnimes] = useState([]);
+  const [showFavourites, setShowFavourites] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('pornFilter', pornFilter);
+  }, [pornFilter]);
 
   const handleToggleChange = (checked) => {
     setPornFilter(checked);
@@ -102,137 +111,27 @@ const App = () => {
 
   if (selectedAnime) {
     return (
-      <div className="bg-gray-100 min-h-screen">
-        <div className="bg-white shadow-md">
-          <div className="flex justify-between items-center p-4">
-            <button className="text-blue-500 flex items-center" onClick={() => setSelectedAnime(null)}>
-              <span>🔙</span> Back
-            </button>
-          </div>
-        </div>
-        <div className="p-4">
-          <img src={selectedAnime.image} alt={selectedAnime.name} className="w-full h-64 object-cover rounded-lg" />
-          <div className="flex items-center justify-between mt-4">
-            <span className="bg-yellow-500 text-white px-4 py-1 rounded-full">
-              {genreEmojis[selectedAnime.genre]} {selectedAnime.genre}
-            </span>
-            <button 
-              className="text-blue-500 save-button-animation" 
-              onClick={() => handleSaveClick(selectedAnime)}
-            >
-              {savedAnimes.includes(selectedAnime) ? 'Unsave' : 'Save'}
-            </button>
-          </div>
-          <h2 className="text-2xl font-bold mt-4">{selectedAnime.name}</h2>
-          <div className="flex items-center mt-2">
-            <i className="fas fa-star text-yellow-500"></i>
-            <span className="ml-2 text-gray-600">4.6/5</span>
-          </div>
-          <p className="text-gray-600 mt-4">
-            Disappearances in the city, old mystical skin scripture and one young boy with nightmares how it's all connected? These days were so complicated for Fang Zheng but he can't even imagine what challenge future prepared for him. Now only ancient runes can help him.
-          </p>
-          <div className="flex justify-between items-center mt-6">
-            <h3 className="text-lg font-bold">3 Episodes</h3>
-            <button className="text-blue-500">Sort by Latest</button>
-          </div>
-          <div className="mt-4">
-            {['Prologue', 'Episode 1', 'Episode 2'].map((episode, index) => (
-              <div key={index} className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md mb-2">
-                <div className="flex items-center">
-                  <img src="https://placehold.co/100x100" alt="Episode thumbnail" className="w-16 h-16 object-cover rounded-lg" />
-                  <div className="ml-4">
-                    <h4 className="text-sm font-bold">{episode}</h4>
-                    <p className="text-xs text-gray-500">May 20, 2024</p>
-                  </div>
-                </div>
-                <i className="fas fa-chevron-right text-gray-500"></i>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      <AnimeDetails
+        selectedAnime={selectedAnime}
+        genreEmojis={genreEmojis}
+        onBackClick={() => setSelectedAnime(null)}
+        savedAnimes={savedAnimes}
+        onSaveClick={handleSaveClick}
+      />
     );
+  }
+
+  if (showFavourites) {
+    return <FavouritesPage savedAnimes={savedAnimes} onBackClick={() => setShowFavourites(false)} genreEmojis={genreEmojis} onSaveClick={handleSaveClick} />;
   }
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      <div className="bg-black text-white p-2 flex items-center justify-between">
-        <span className="flex items-center">
-          <i className="fas fa-fire text-red-500 mr-2"></i>
-          Need hotter content?
-        </span>
-        <ToggleSwitch onChange={handleToggleChange} checked={pornFilter} />
-      </div>
+      <Header pornFilter={pornFilter} handleToggleChange={handleToggleChange} />
       <MangaSlideshow mangas={mangas} onReadClick={handleReadClick} />
-      <div className="flex justify-center space-x-2 mt-4">
-        <button 
-          className="bg-gray-400 text-white px-4 py-2 rounded-full flex items-center genre-filter-animation" 
-          onClick={() => handleGenreClick('all')}
-        >
-          All
-        </button>
-        <button 
-          className="bg-yellow-400 text-white px-4 py-2 rounded-full flex items-center genre-filter-animation genre-thriller" 
-          onClick={() => handleGenreClick('Thriller')}
-        >
-          <span>💀</span>
-          Thriller
-        </button>
-        <button 
-          className="bg-orange-400 text-white px-4 py-2 rounded-full flex items-center genre-filter-animation genre-drama" 
-          onClick={() => handleGenreClick('Drama')}
-        >
-          <span>💔</span>
-          Drama
-        </button>
-        <button 
-          className="bg-yellow-200 text-orange-500 px-4 py-2 rounded-full flex items-center genre-filter-animation genre-supernatural" 
-          onClick={() => handleGenreClick('Supernatural')}
-        >
-          <span>🔮</span>
-          Supernatural
-        </button>
-        <button 
-          className="bg-pink-400 text-white px-4 py-2 rounded-full flex items-center genre-filter-animation genre-romance" 
-          onClick={() => handleGenreClick('Romance')}
-        >
-          <span>❤️</span>
-          Romance
-        </button>
-        <button 
-          className="bg-green-400 text-white px-4 py-2 rounded-full flex items-center genre-filter-animation genre-adventure" 
-          onClick={() => handleGenreClick('Adventure')}
-        >
-          <span>🗺️</span>
-          Adventure
-        </button>
-        <button 
-          className="bg-blue-400 text-white px-4 py-2 rounded-full flex items-center genre-filter-animation genre-business" 
-          onClick={() => handleGenreClick('Business')}
-        >
-          <span>💼</span>
-          Business
-        </button>
-      </div>
-      <div className="grid grid-cols-2 gap-4 p-4">
-        {allAnimes.map((anime, index) => (
-          <AnimeCard key={index} anime={anime} onClick={() => handleAnimeClick(anime)} genreEmojis={genreEmojis} savedAnimes={savedAnimes} onSaveClick={handleSaveClick} />
-        ))}
-      </div>
-      <div className="bg-white fixed bottom-0 w-full flex justify-around items-center py-2 border-t border-gray-200">
-        <div className="flex flex-col items-center text-orange-500">
-          <i className="fas fa-home text-2xl"></i>
-          <span className="text-xs">Home</span>
-        </div>
-        <div className="flex flex-col items-center text-gray-400">
-          <i className="fas fa-heart text-2xl"></i>
-          <span className="text-xs">Favourites</span>
-        </div>
-        <div className="flex flex-col items-center text-gray-400">
-          <i className="fas fa-user text-2xl"></i>
-          <span className="text-xs">Profile</span>
-        </div>
-      </div>
+      <GenreSelector genreEmojis={genreEmojis} selectedGenre={selectedGenre} handleGenreClick={handleGenreClick} />
+      <AnimeList animes={allAnimes} handleAnimeClick={handleAnimeClick} genreEmojis={genreEmojis} savedAnimes={savedAnimes} onSaveClick={handleSaveClick} />
+      <Footer setShowFavourites={setShowFavourites} />
     </div>
   );
 };

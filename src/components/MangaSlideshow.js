@@ -1,3 +1,4 @@
+// components/MangaSlideshow.js
 import React, { useState, useEffect } from 'react';
 
 const MangaSlideshow = ({ mangas, onReadClick }) => {
@@ -28,7 +29,7 @@ const MangaSlideshow = ({ mangas, onReadClick }) => {
         <h1 className="text-white text-3xl font-bold">{manga.title}</h1>
         <button 
           className="bg-white text-black px-6 py-2 mt-4 rounded-full button-animation" 
-          onClick={onReadClick}
+          onClick={() => onReadClick(manga)} // Убедитесь, что передается manga
         >
           Read
         </button>
