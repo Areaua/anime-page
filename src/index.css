@@ -136,28 +136,33 @@ code {
 .toggle-switch {
   width: 60px;
   height: 30px;
-  background-color: white;
+  background-color: darkgray; /* Темно-серый цвет для выключенного состояния */
   border-radius: 15px;
   position: relative;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   cursor: pointer;
   display: flex;
   align-items: center;
+  transition: background-color 0.3s;
+}
+
+.toggle-switch.active {
+  background-color: green; /* Зеленый цвет для включенного состояния */
 }
 
 .toggle-switch::before {
-  content: '';
+  content: '18+';
   position: absolute;
   width: 30px;
   height: 30px;
-  background-color: orange;
+  background-color: #d3d3d3; /* Темно-белый цвет с легким сероватым оттенком */
   border-radius: 50%;
   top: 0;
   left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: white; /* Светло-белый цвет для текста */
   font-family: Arial, sans-serif;
   font-size: 14px;
   font-weight: bold;
