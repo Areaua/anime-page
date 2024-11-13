@@ -3,7 +3,7 @@ import React from 'react';
 
 const Footer = ({ setShowFavourites }) => {
   return (
-    <div className="bg-white fixed bottom-0 w-full flex justify-around items-center py-2 border-t border-gray-200">
+    <div className="bg-white fixed bottom-0 w-full flex justify-around items-center py-2 border-t border-gray-200" style={{ height: '60px' }}>
       <div 
         className="flex flex-col items-center text-orange-500 footer-button-animation" 
         onClick={() => setShowFavourites(false)}

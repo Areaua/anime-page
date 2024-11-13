@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import ToggleSwitch from './ToggleSwitch';
 import AnimeCard from './AnimeCard';
 import GenreSelector from './GenreSelector';
-import BackButton from './BackButton';
 import MangaSlideshow from './MangaSlideshow'; // Импорт компонента слайдера
 import ComicReadingPage from './ComicReadingPage'; // Импорт компонента для чтения манги
 import AnimeDetails from './AnimeDetails'; // Импорт компонента AnimeDetails
@@ -78,12 +77,7 @@ const FavouritesPage = ({ savedAnimes, onBackClick, genreEmojis, onSaveClick }) 
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen">
-      <div className="bg-white shadow-md">
-        <div className="flex justify-between items-center p-4">
-          <BackButton onClick={onBackClick} />
-        </div>
-      </div>
+    <div className="bg-gray-100 min-h-screen overflow-y-auto">
       <div className="bg-black text-white p-2 flex items-center justify-between">
         <span className="flex items-center">
           <i className="fas fa-fire text-red-500 mr-2"></i>
@@ -93,7 +87,7 @@ const FavouritesPage = ({ savedAnimes, onBackClick, genreEmojis, onSaveClick }) 
       </div>
       <MangaSlideshow mangas={mangas} onReadClick={handleMangaClick} /> {/* Добавляем слайдер */}
       <GenreSelector genreEmojis={genreEmojis} selectedGenre={selectedGenre} handleGenreClick={handleGenreClick} />
-      <div className="p-4">
+      <div className="p-4 overflow-y-auto" style={{ height: 'calc(100vh - 200px)' }}>
         <h2 className="text-2xl font-bold mb-4">Favourites</h2>
         {allAnimes.length === 0 ? (
           <p className="text-gray-600">No favourites yet.</p>
@@ -113,7 +107,7 @@ const FavouritesPage = ({ savedAnimes, onBackClick, genreEmojis, onSaveClick }) 
           </div>
         )}
       </div>
-      <div className="bg-white fixed bottom-0 w-full flex justify-around items-center py-2 border-t border-gray-200">
+      <div className="bg-white fixed bottom-0 w-full flex justify-around items-center py-2 border-t border-gray-200" style={{ height: '60px' }}>
         <div 
           className="flex flex-col items-center text-gray-400 footer-button-animation" 
           onClick={onBackClick}
