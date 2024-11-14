@@ -2,7 +2,7 @@ import React from 'react';
 
 const GenreSelector = ({ genreEmojis, selectedGenre, handleGenreClick }) => {
   return (
-    <div className="flex justify-center space-x-2 mt-4">
+    <div className="genre-selector-container">
       <button 
         className={`bg-gray-400 text-white px-4 py-2 rounded-full flex items-center genre-filter-animation ${selectedGenre === 'all' ? 'bg-gray-600' : ''}`} 
         onClick={() => handleGenreClick('all')}

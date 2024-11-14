@@ -41,7 +41,7 @@ const ProfilePage = ({ onBackClick, setShowFavourites, pornFilter, handleToggleC
                 </button>
               </div>
               <h3 className="text-2xl font-bold">{username}</h3>
-              <p className="text-gray-600 text-sm">since BINSER 10.20.2024</p>
+              <p className="text-gray-600 text-sm">Since  10.20.2024</p>
             </div>
           </div>
           <div className="flex justify-center items-center mt-4 space-x-4">
