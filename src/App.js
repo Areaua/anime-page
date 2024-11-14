@@ -2,17 +2,37 @@
 import React, { useState } from 'react';
 import HomePage from './components/HomePage';
 import FavouritesPage from './components/FavouritesPage';
+import ProfilePage from './components/ProfilePage';
+import Footer from './components/Footer';
 
 const App = () => {
   const [savedAnimes, setSavedAnimes] = useState([]);
-  const [showFavourites, setShowFavourites] = useState(false);
+  const [activePage, setActivePage] = useState('home');
+  const [pornFilter, setPornFilter] = useState(false);
+
+  const handleBackClick = () => {
+    setActivePage('home');
+  };
+
+  const handleToggleChange = (checked) => {
+    setPornFilter(checked);
+  };
 
   return (
-    <div className="App">
-      {showFavourites ? (
+    <div className="App flex flex-col min-h-screen">
+      {activePage === 'home' && (
+        <HomePage
+          savedAnimes={savedAnimes}
+          setSavedAnimes={setSavedAnimes}
+          setShowFavourites={() => setActivePage('favourites')}
+          pornFilter={pornFilter}
+          handleToggleChange={handleToggleChange}
+        />
+      )}
+      {activePage === 'favourites' && (
         <FavouritesPage
           savedAnimes={savedAnimes}
-          onBackClick={() => setShowFavourites(false)}
+          onBackClick={handleBackClick}
           genreEmojis={{
             'Thriller': '💀',
             'Drama': '💔',
@@ -28,14 +48,19 @@ const App = () => {
               setSavedAnimes([...savedAnimes, anime]);
             }
           }}
-        />
-      ) : (
-        <HomePage
-          savedAnimes={savedAnimes}
-          setSavedAnimes={setSavedAnimes}
-          setShowFavourites={setShowFavourites}
+          pornFilter={pornFilter}
+          handleToggleChange={handleToggleChange}
         />
       )}
+      {activePage === 'profile' && (
+        <ProfilePage
+          onBackClick={handleBackClick}
+          setShowFavourites={() => setActivePage('favourites')}
+          pornFilter={pornFilter}
+          handleToggleChange={handleToggleChange}
+        />
+      )}
+      <Footer activePage={activePage} setActivePage={setActivePage} />
     </div>
   );
 };
