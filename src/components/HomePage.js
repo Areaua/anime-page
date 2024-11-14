@@ -144,7 +144,7 @@ const HomePage = ({ savedAnimes, setSavedAnimes, setShowFavourites }) => {
       <Header pornFilter={pornFilter} handleToggleChange={handleToggleChange} />
       <MangaSlideshow mangas={mangas} onReadClick={handleReadClick} />
       <GenreSelector genreEmojis={genreEmojis} selectedGenre={selectedGenre} handleGenreClick={handleGenreClick} />
-      <div className="p-4 overflow-y-auto" style={{ height: 'calc(100vh - 200px)' }}>
+      <div className="p-4 overflow-y-auto" style={{ height: 'calc(100vh - 260px)' }}>
         <AnimeList animes={allAnimes} handleAnimeClick={handleAnimeClick} genreEmojis={genreEmojis} savedAnimes={savedAnimes} onSaveClick={handleSaveClick} />
       </div>
       <Footer setShowFavourites={setShowFavourites} />

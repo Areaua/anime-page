@@ -66,20 +66,14 @@ const ProfilePage = ({ onBackClick, setShowFavourites, pornFilter, handleToggleC
           </div>
         </div>
         <div className="bg-white shadow-md rounded-lg p-4 mb-4 w-full max-w-md">
-          <h3 className="text-lg font-bold mb-2">Notifications</h3>
-          <div className="flex items-center">
-            <button onClick={() => setShowNotificationsModal(true)} className="text-gray-600">
-              <i className="fas fa-bell mr-2"></i>
-              No notifications
+          <div className="flex flex-col items-start">
+            <button onClick={() => setShowNotificationsModal(true)} className="flex items-center mb-2 text-red-500">
+              <i className="fas fa-bell text-2xl mr-2"></i>
+              <span>No notifications</span>
             </button>
-          </div>
-        </div>
-        <div className="bg-white shadow-md rounded-lg p-4 mb-4 w-full max-w-md">
-          <h3 className="text-lg font-bold mb-2">FAQ</h3>
-          <div className="flex items-center">
-            <button onClick={() => setShowFAQModal(true)} className="text-gray-600">
-              <i className="fas fa-question-circle mr-2"></i>
-              FAQ
+            <button onClick={() => setShowFAQModal(true)} className="flex items-center text-blue-500">
+              <i className="fas fa-question-circle text-2xl mr-2"></i>
+              <span>FAQ</span>
             </button>
           </div>
         </div>

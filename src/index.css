@@ -330,3 +330,87 @@ body {
     white-space: normal;
   }
 }
+/* Обновленные стили для кружка с "18+" */
+.toggle-switch::before {
+  background-color: orange; /* Оранжевый цвет для кружка с "18+" */
+}
+
+/* Обновленные стили для кнопок "Notifications" и "FAQ" */
+.profile-section {
+  background-color: #f3f4f6; /* Светло-серый фон */
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-section button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: gray;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.profile-section button i {
+  margin-right: 0.5rem;
+  color: orange; /* Цвет смайлов */
+}
+
+/* Стили для модального окна */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Темный фон */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  position: relative;
+  width: 80%;
+  max-width: 400px;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: gray;
+}
+
+.modal-close-button:hover {
+  color: black;
+}
+
+.modal-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.modal-tabs button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: gray;
+  font-size: 1rem;
+  margin: 0 0.5rem;
+}
+
+.modal-tabs button.active {
+  color: black;
+  font-weight: bold;
+}
