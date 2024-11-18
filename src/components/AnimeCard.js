@@ -16,7 +16,7 @@ const AnimeCard = ({ anime, onClick, genreEmojis }) => {
           </p>
         </div>
         {anime.name.includes('18+') && (
-          <span className="text-red-500 text-xs">18+</span>
+          <div className="age-badge">18+</div>
         )}
         <div className="flex items-center mt-1">
           <i className="fas fa-star text-yellow-500 text-xs"></i>

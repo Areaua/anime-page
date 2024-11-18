@@ -87,7 +87,7 @@ const FavouritesPage = ({ savedAnimes, onBackClick, genreEmojis, onSaveClick }) 
       </div>
       <MangaSlideshow mangas={mangas} onReadClick={handleMangaClick} /> {/* Добавляем слайдер */}
       <GenreSelector genreEmojis={genreEmojis} selectedGenre={selectedGenre} handleGenreClick={handleGenreClick} />
-      <div className="p-4 overflow-y-auto" style={{ height: 'calc(100vh - 260px)' }}>
+      <div className="p-4 overflow-y-auto" style={{ marginBottom: '80px' }}>
         <h2 className="text-2xl font-bold mb-4">Favourites</h2>
         {allAnimes.length === 0 ? (
           <p className="text-gray-600">No favourites yet.</p>

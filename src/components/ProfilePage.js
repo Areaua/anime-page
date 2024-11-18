@@ -24,8 +24,7 @@ const ProfilePage = ({ onBackClick, setShowFavourites, pornFilter, handleToggleC
     <div className="bg-gray-100 min-h-screen overflow-y-auto flex flex-col">
       <Header pornFilter={pornFilter} handleToggleChange={handleToggleChange} />
       <div className="p-4 flex-grow flex flex-col items-center">
-        <h2 className="text-2xl font-bold mb-4">Profile</h2>
-        <div className="bg-white shadow-md rounded-lg p-4 mb-4 w-full max-w-md">
+        <div className="p-4 mb-4 w-full max-w-md">
           <div className="flex flex-col items-center mb-4">
             <img 
               src="https://via.placeholder.com/150" 
@@ -67,13 +66,31 @@ const ProfilePage = ({ onBackClick, setShowFavourites, pornFilter, handleToggleC
         </div>
         <div className="bg-white shadow-md rounded-lg p-4 mb-4 w-full max-w-md">
           <div className="flex flex-col items-start">
-            <button onClick={() => setShowNotificationsModal(true)} className="flex items-center mb-2 text-red-500">
-              <i className="fas fa-bell text-2xl mr-2"></i>
-              <span>No notifications</span>
+            <button onClick={() => setShowNotificationsModal(true)} className="flex items-center mb-2 text-black">
+              <div className="relative">
+                <div className="bg-red-500 p-2 rounded-lg" style={{ width: '40px', height: '40px' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full text-white" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C10.343 2 9 3.343 9 5v1.07C6.165 6.555 4 8.992 4 12v5l-1 1v1h18v-1l-1-1v-5c0-3.008-2.165-5.445-5-5.93V5c0-1.657-1.343-3-3-3zm0 20c1.104 0 2-.896 2-2H10c0 1.104.896 2 2 2z"/>
+                    <circle cx="18" cy="5" r="3" fill="#FF69B4" />
+                  </svg>
+                </div>
+              </div>
+              <span className="ml-2">Notifications</span>
             </button>
-            <button onClick={() => setShowFAQModal(true)} className="flex items-center text-blue-500">
-              <i className="fas fa-question-circle text-2xl mr-2"></i>
-              <span>FAQ</span>
+            <button onClick={() => setShowFAQModal(true)} className="flex items-center text-black">
+              <div className="bg-blue-500 p-2 rounded-lg" style={{ width: '40px', height: '40px' }}>
+                <div className="relative text-white flex items-center justify-center h-full">
+                  <i className="fas fa-comment-dots" style={{ fontSize: '40px' }}></i>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="flex space-x-1">
+                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <span className="ml-2">FAQ</span>
             </button>
           </div>
         </div>
@@ -89,15 +106,6 @@ const ProfilePage = ({ onBackClick, setShowFavourites, pornFilter, handleToggleC
             </button>
             <h3 className="text-lg font-bold mb-2">Premium Subscription</h3>
             <p className="text-gray-600">You can upgrade to a premium subscription to get access to exclusive content and features.</p>
-            <div className="mt-4">
-              <h4 className="text-md font-bold mb-2">Pricing:</h4>
-              <ul className="list-disc list-inside">
-                <li>1 Month - $9.99</li>
-                <li>3 Months - $24.99</li>
-                <li>6 Months - $44.99</li>
-                <li>1 Year - $79.99</li>
-              </ul>
-            </div>
             <button className="bg-blue-500 text-white px-4 py-2 rounded-full mt-4">
               Upgrade Now
             </button>
